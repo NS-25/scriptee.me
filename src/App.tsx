@@ -1,5 +1,5 @@
 import Navbar from "./components/Navbar";
-import SignIn from "./components/SignIn";
+// import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 
 function App() {
@@ -10,9 +10,9 @@ function App() {
       <div>
         <SignUp />
       </div>
-      <div>
+      {/* <div>
         <SignIn />
-      </div>
+      </div> */}
     </>
   );
 }
