@@ -1,15 +1,16 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 
 function App() {
+  const location = useLocation();
   return (
     <>
-      {/* <h1 className="text-green-700">Hello George</h1> */}
-{/* <Navbar/> */}
+      {/* Show Navbar only if the user is on the Home page */}
+
+      {location.pathname === "/" && <Navbar />}
       <Routes>
-        <Route path="/" element={<Navbar />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
       </Routes>

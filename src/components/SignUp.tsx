@@ -1,8 +1,14 @@
-
-
-
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
+  //
+  const handleSignInRedirect = (e) => {
+    e.preventDefault();
+    navigate("/signin");
+  };
+
   return (
     <>
       <div
@@ -67,7 +73,11 @@ const SignUp = () => {
           {/* <hr /> */}
           <div className="border-t border-t-gray-300 flex flex-row items-center justify-center py-4 gap-2">
             <p className="text-gray-600">Already have an account?</p>
-            <a href="/signup" className="hover:underline">
+            <a
+              href="/signin"
+              onClick={handleSignInRedirect}
+              className="hover:underline"
+            >
               Sign In
             </a>
           </div>
