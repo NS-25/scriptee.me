@@ -1,7 +1,14 @@
+
+
+
+
 const SignUp = () => {
   return (
     <>
-      <div id="wrapper" className=" p-4 min-h-[calc(100vh-3em)] grid place-items-center">
+      <div
+        id="wrapper"
+        className=" p-4 min-h-[calc(100vh-3em)] grid place-items-center"
+      >
         <div className="border max-w-lg min-w-lg rounded-md border-gray-300">
           <form className="p-8">
             <h2 className="text-3xl font-semibold mb-2 ">Create an accoount</h2>
@@ -60,7 +67,7 @@ const SignUp = () => {
           {/* <hr /> */}
           <div className="border-t border-t-gray-300 flex flex-row items-center justify-center py-4 gap-2">
             <p className="text-gray-600">Already have an account?</p>
-            <a href="#" className="hover:underline">
+            <a href="/signup" className="hover:underline">
               Sign In
             </a>
           </div>

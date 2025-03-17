@@ -50,7 +50,7 @@ const SignIn = () => {
             <div id="links" className="flex justify-around space-x-10">
               <div className="flex flex-row text-center text-sm text-gray-500 space-x-1">
                 <p>Don't have an account?</p>
-                <a href="#" className="text-gray-900  hover:underline">
+                <a href="/signin" className="text-gray-900  hover:underline">
                   Sign up
                 </a>
               </div>

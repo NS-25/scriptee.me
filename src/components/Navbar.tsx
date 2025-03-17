@@ -1,4 +1,5 @@
 import { FaHandsHelping } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -13,10 +14,10 @@ const Navbar = () => {
         </div>
         <ul className="flex space-x-4 ">
           <li className="hover:text-blue-600">
-            <a href="#">SingUp</a>
+            <Link to="/signin">Sign In</Link>
           </li>
           <li className="hover:text-blue-600">
-            <a href="#">SignIn</a>
+            <Link to="/signup">Sign Up</Link>
           </li>
         </ul>
       </nav>
