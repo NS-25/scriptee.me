@@ -2,15 +2,29 @@ import { useNavigate } from "react-router-dom";
 import Layout from "./Layout";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "firebase";
+import { auth } from "./firebase";
 
 const SignIn = () => {
   const navigate = useNavigate();
 
-  const [email,setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  // sign in for fibase codes.
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/signup");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+  };
   // Function to handle click and navigate
   const handleSignInRedirect = (e) => {
     e.preventDefault(); // Prevent the default <a></a> behavior
