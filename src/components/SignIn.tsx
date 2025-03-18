@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Layout from "./Layout";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const SignIn = () => {
   ///////////////
 
   return (
-    <>
+    <Layout>
       <div
         id="container"
         className="min-h-screen flex items-center justify-center"
@@ -77,7 +78,7 @@ const SignIn = () => {
           </form>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 export default SignIn;
