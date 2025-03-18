@@ -1,8 +1,37 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Layout from "./Layout";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+import { auth } from "./firebase";
 
 const SignUp = () => {
   const navigate = useNavigate();
+
+  // using firebase sign up setup..
+  const [fullname, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  // firebase setup..
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log("userCredential - Singup : ", userCredential);
+        //Signed in
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/signin");
+      })
+      .catch((error) => {
+        console.log("Error Signup : ", error);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+  };
 
   const handleSignInRedirect = (e) => {
     e.preventDefault();
@@ -17,7 +46,7 @@ const SignUp = () => {
       >
         <div className="border max-w-lg min-w-lg rounded-md border-gray-300">
           <form className="p-8">
-            <h2 className="text-3xl font-semibold mb-2 ">Create an accoount</h2>
+            <h2 className="text-3xl font-semibold mb-2 ">Create an account</h2>
             <p className="text-sm text-gray-600 mb-4">
               Enter your information to get started
             </p>
@@ -27,8 +56,11 @@ const SignUp = () => {
                   Full Name
                 </label>
                 <input
-                  type="fullname"
+                  type="name"
                   placeholder="Nyunt Sein"
+                  value={fullname}
+                  onChange={(e) => setFullName(e.target.value)}
+                  required
                   className="border py-3 px-4 text-sm rounded-md border-gray-300"
                 />
               </div>
@@ -39,6 +71,9 @@ const SignUp = () => {
                 <input
                   type="email"
                   placeholder="name@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   className="border py-3 px-4 text-sm rounded-md border-gray-300"
                 />
               </div>
@@ -49,6 +84,8 @@ const SignUp = () => {
                 <input
                   type="password"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="border py-3 px-4 text-sm rounded-md border-gray-300"
                 />
               </div>
@@ -59,12 +96,15 @@ const SignUp = () => {
                 <input
                   type="password"
                   placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   className="border py-3 px-4 text-sm rounded-md border-gray-300"
                 />
               </div>
             </div>
             <button
               type="submit"
+              onClick={handleSubmit}
               className="border w-full py-3 bg-black text-white rounded-md font-semibold cursor-pointer hover:bg-black/80"
             >
               Sign Up

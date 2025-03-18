@@ -1,8 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import Layout from "./Layout";
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "firebase";
 
 const SignIn = () => {
   const navigate = useNavigate();
+
+  const [email,setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
 
   // Function to handle click and navigate
   const handleSignInRedirect = (e) => {
