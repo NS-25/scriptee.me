@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import Layout from "./Layout";
 
 const SignUp = () => {
   const navigate = useNavigate();
 
-  //
   const handleSignInRedirect = (e) => {
     e.preventDefault();
     navigate("/signin");
   };
 
   return (
-    <>
+    <Layout>
       <div
         id="wrapper"
         className=" p-4 min-h-[calc(100vh-3em)] grid place-items-center"
@@ -83,7 +83,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
