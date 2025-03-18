@@ -15,11 +15,13 @@ const SignIn = () => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        console.log("userCredential - signIn :", userCredential);
         const user = userCredential.user;
         console.log(user);
         navigate("/signup");
       })
       .catch((error) => {
+        console.log("Error SignIn :", error);
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
@@ -53,8 +55,10 @@ const SignIn = () => {
                 Email
               </label>
               <input
+                id="email"
                 type="email"
                 placeholder="name@example.com"
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 className="  border border-gray-300 focus:border-blue-600 rounded-sm p-1 px-2 "
               />
@@ -66,13 +70,16 @@ const SignIn = () => {
                 </label>
 
                 <input
+                  id="password"
                   type="password"
                   placeholder="........."
                   required
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full border border-gray-300 focus:border-blue-600 rounded-sm p-1 px-2"
                 />
                 <button
                   type="submit"
+                  onClick={handleSignIn}
                   className="w-full my-6 border rounded-sm bg-black text-white p-2 cursor-pointer hover:opacity-70"
                 >
                   Sign In
