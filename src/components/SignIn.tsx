@@ -18,7 +18,7 @@ const SignIn = () => {
         console.log("userCredential - signIn :", userCredential);
         const user = userCredential.user;
         console.log(user);
-        navigate("/signup");
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.log("Error SignIn :", error);
@@ -40,7 +40,7 @@ const SignIn = () => {
         id="container"
         className="min-h-screen flex items-center justify-center"
       >
-        <div className="flex flex-col max-w-lg min-h-60  bg-gray-100 p-8 bg-white border border-gray-300 rounded-md">
+        <div className="flex flex-col max-w-lg min-h-60   p-8 bg-white border border-gray-300 rounded-md">
           <div id="heading" className="space-y-1">
             <h2 className="text-2xl font-bold text-center">
               Sign in to your account
