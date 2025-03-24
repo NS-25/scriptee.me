@@ -1,10 +1,10 @@
-import { useState, createContext,useContext } from "react";
+import { useState, createContext, useContext } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
 
-const authContext = createContext(null);// should be object
+const AuthContext = createContext(null); // should be object
 
-function useAuth() {
+export function AuthProvider({ children }) {
   const [authed, setAuthed] = useState(false);
 
   const login = (email, password) => {
@@ -22,23 +22,23 @@ function useAuth() {
       });
   };
 
-  const logout = () => {
-    console.log("logout");
-  };
+  // const logout = () => {
+  //   console.log("logout");
+  // };
 
   return (
-    authed,
-    login,
-    logout,
-);
+    <AuthContext.Provider value={{ authed, login }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
-export function AuthProvider({ children }) {
-  const auth = useAuth();
+// export function AuthProvider({ children }) {
+//   const auth = useAuth();
 
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
-}
+//   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+// }
 
-export default function AuthConsumer() {
-  return useContext(authContext);
+export function AuthConsumer() {
+  return useContext(AuthContext);
 }
