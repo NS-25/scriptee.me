@@ -1,13 +1,15 @@
 import { useState, createContext, useContext } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
+import { signOut} from "firebase/auth";
+
 
 const authContext = createContext({});
 
 function useAuth() {
   const [authed, setAuthed] = useState(false);
 
-  const login = async (email, password) => {
+  const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("User signed in: ", userCredential);
@@ -22,9 +24,21 @@ function useAuth() {
       });
   };
 
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("User signed out");
+        localStorage.removeItem("user");
+      })
+      .catch((error) => {
+        console.error("Logout error: ", error.message);
+      });
+  };
+
   return {
     authed,
     login,
+    logout,
   };
 }
 

@@ -7,8 +7,8 @@ import useAuth from "../hooks/useAuth";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const functionReturn = useAuth();
-  console.log("functionReturn : ", functionReturn);
+  // const functionReturn = useAuth();
+  // console.log("functionReturn : ", functionReturn);
 
   const { login } = useAuth();
 
@@ -20,6 +20,7 @@ const SignIn = () => {
     e.preventDefault();
     login(email, password)
       .then((res) => {
+        console.log(res)
         navigate("/dashboard");
       })
       .catch((error) => {

@@ -7,7 +7,7 @@ const DashBoard = () => {
   // console.log("authed ::::", authed);
   return (
     <Layout>
-      <div className="w-full min-h-100 border-2-green bg-green-300">
+      <div className="w-full min-h-screen border-2-green bg-green-300">
         {authed ? <h1>Welcome to our DashBoard</h1> : <h1>Please Sign in!</h1>}
       </div>
     </Layout>
