@@ -1,8 +1,10 @@
 import Layout from "./Layout";
-import { authConsumer } from "../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 
 const DashBoard = () => {
-  const { authed } = authConsumer();
+  const { authed } = useAuth();
+
+  // console.log("authed ::::", authed);
   return (
     <Layout>
       <div className="w-full min-h-100 border-2-green bg-green-300">

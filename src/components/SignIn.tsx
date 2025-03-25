@@ -3,9 +3,14 @@ import Layout from "./Layout";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
+import useAuth from "../hooks/useAuth";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const functionReturn = useAuth();
+  console.log("functionReturn : ", functionReturn);
+
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,18 +18,12 @@ const SignIn = () => {
   // sign in for fibase codes.
   const handleSignIn = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log("userCredential - signIn :", userCredential);
-        const user = userCredential.user;
-        console.log(user);
+    login(email, password)
+      .then((res) => {
         navigate("/dashboard");
       })
       .catch((error) => {
-        console.log("Error SignIn :", error);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        console.log(error);
       });
   };
   // Function to handle click and navigate

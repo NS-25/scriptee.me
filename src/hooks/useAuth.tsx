@@ -2,12 +2,12 @@ import { useState, createContext, useContext } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
 
-const AuthContext = createContext(null); // should be object
+const authContext = createContext({});
 
-export function AuthProvider({ children }) {
+function useAuth() {
   const [authed, setAuthed] = useState(false);
 
-  const login = (email, password) => {
+  const login = async (email, password) => {
     return signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("User signed in: ", userCredential);
@@ -22,16 +22,35 @@ export function AuthProvider({ children }) {
       });
   };
 
-  // const logout = () => {
-  //   console.log("logout");
-  // };
-
-  return (
-    <AuthContext.Provider value={{ authed, login }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return {
+    authed,
+    login,
+  };
 }
+
+export function AuthProvider({ children }) {
+  const auth = useAuth();
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+}
+
+export default function AuthConsumer() {
+  return useContext(authContext);
+}
+
+// export function AuthProvider({ children }) {
+//   const [authed, setAuthed] = useState(false);
+// }
+
+//   // const logout = () => {
+//   //   console.log("logout");
+//   // };
+
+//   return (
+//     <AuthContext.Provider value={{ authed, login }}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// }
 
 // export function AuthProvider({ children }) {
 //   const auth = useAuth();
@@ -39,6 +58,6 @@ export function AuthProvider({ children }) {
 //   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 // }
 
-export function authConsumer() {
-  return useContext(AuthContext);
-}
+// export function authConsumer() {
+//   return useContext(AuthContext);
+// }

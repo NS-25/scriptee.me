@@ -13,6 +13,7 @@ function App() {
       {location.pathname === "/" && <Navbar />}
       <Routes>
         <Route path="/dashboard" element={<DashBoard />} />
+
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
       </Routes>
