@@ -2,8 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Layout from "./Layout";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-
-import { auth } from "./firebase";
+import { auth } from "../services/firebase";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ const SignUp = () => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log("userCredential - Singup : ", userCredential);
+        console.log("userCredential - Signup : ", userCredential);
         //Signed in
         const user = userCredential.user;
         console.log(user);
