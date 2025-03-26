@@ -1,8 +1,7 @@
 import { useState, createContext, useContext } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
-import { signOut} from "firebase/auth";
-
+import { signOut } from "firebase/auth";
 
 const authContext = createContext({});
 
@@ -29,6 +28,7 @@ function useAuth() {
       .then(() => {
         console.log("User signed out");
         localStorage.removeItem("user");
+        setAuthed(false);
       })
       .catch((error) => {
         console.error("Logout error: ", error.message);

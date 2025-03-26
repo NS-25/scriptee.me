@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { FaHandsHelping } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
@@ -5,6 +6,18 @@ import useAuth from "../hooks/useAuth";
 const Navbar = () => {
   const { authed, logout } = useAuth();
   const navigate = useNavigate();
+  const [isAuth, setIsAuth] = useState(false);
+
+  console.log("authed : ", authed);
+  console.log("isAuth : ", isAuth);
+
+  useEffect(() => {
+    if (authed) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+  }, [authed]);
 
   const handleLogout = () => {
     logout();
@@ -21,16 +34,18 @@ const Navbar = () => {
           <FaHandsHelping />
           <h1 className="text-zinc-500">Scriptee.me</h1>
         </div>
-        <ul className="flex space-x-4 ">
-          <li className="hover:text-blue-600">
-            <Link to="/signin">Sign In</Link>
-          </li>
-          <li className="hover:text-blue-600">
-            <Link to="/signup">Sign Up</Link>
-          </li>
-        </ul>
+        {!isAuth && (
+          <ul className="flex space-x-4 ">
+            <li className="hover:text-blue-600">
+              <Link to="/signin">Sign In</Link>
+            </li>
+            <li className="hover:text-blue-600">
+              <Link to="/signup">Sign Up</Link>
+            </li>
+          </ul>
+        )}
         <div>
-          {authed ? (
+          {isAuth ? (
             <button
               onClick={handleLogout}
               className="bg-red-500 hover:bg-red-600 px-4 py-2 rouded"
